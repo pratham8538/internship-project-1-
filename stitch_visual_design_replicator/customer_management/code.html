@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizzania Admin - Customers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-fixed": "#ffdad4", "primary-container": "#be1a1a", "inverse-surface": "#373102", secondary: "#b51c0c", "on-surface": "#201c00", "on-primary-container": "#ffd1cb", background: "#fff9eb", "surface-container-lowest": "#ffffff", "outline-variant": "#e5beb9", "primary-fixed-dim": "#ffb4aa", "tertiary-container": "#c5a955", "surface-bright": "#fff9eb", "surface-variant": "#f0e3a4", "surface-container": "#fcefae", "inverse-primary": "#ffb4aa", "on-secondary-fixed": "#400100", "error-container": "#ffdad6", "on-tertiary-fixed-variant": "#574500", "on-primary-fixed": "#410002", tertiary: "#725c0d", "primary-fixed": "#ffdad5", "on-tertiary-container": "#4e3e00", "on-tertiary": "#ffffff", "on-secondary-container": "#fffbff", "on-error-container": "#93000a", "on-secondary": "#ffffff", "secondary-container": "#d93723", "on-primary": "#ffffff", "on-surface-variant": "#5c403c", "on-error": "#ffffff", primary: "#BE1A1A", "surface-tint": "#bb1718", "on-tertiary-fixed": "#241a00", "on-secondary-fixed-variant": "#920700", "tertiary-fixed": "#ffe088", surface: "#fff9eb", "on-background": "#201c00", "surface-container-low": "#fff4c4", "surface-container-highest": "#f0e3a4", "surface-container-high": "#f6e9a9", "on-primary-fixed-variant": "#930009", error: "#ba1a1a", "secondary-fixed-dim": "#ffb4a7", "tertiary-fixed-dim": "#e2c46d", outline: "#906f6b", "inverse-on-surface": "#fff2b1", "surface-dim": "#e7db9c", "background-light": "#f8f6f6", "background-dark": "#211111"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {sm: "12px", "margin-mobile": "16px", md: "24px", gutter: "24px", base: "8px", lg: "40px", xs: "4px", xl: "64px", "margin-desktop": "80px"}, fontFamily: {"body-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Montserrat"], "label-sm": ["Plus Jakarta Sans"], "headline-md": ["Montserrat"], "headline-lg": ["Montserrat"], "headline-lg-mobile": ["Montserrat"], headline: ["Public Sans"], display: ["Public Sans"], body: ["Inter"], label: ["Public Sans"]}, fontSize: {"body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "label-lg": ["14px", {lineHeight: "1.2", fontWeight: "600"}], "display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "label-sm": ["12px", {lineHeight: "1.2", fontWeight: "500"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "1.2", fontWeight: "700"}]}}}};</script>
+<style>
+        .glass-panel {
+            background: rgba(255, 249, 235, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .table-shadow {
+            box-shadow: 0 10px 30px -10px rgba(151, 0, 10, 0.08);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-container-highest');
+            border-radius: theme('borderRadius.full');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.tertiary-container');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+<div class="flex h-screen w-full">
+<!-- SideNavBar -->
+<aside class="bg-surface-container shadow-lg h-screen w-64 fixed left-0 top-0 flex flex-col py-md z-40">
+<div class="px-md mb-xl flex flex-col items-start gap-md">
+<div class="flex items-center gap-sm w-full">
+<img alt="Admin User" class="w-12 h-12 rounded-full object-cover border-2 border-primary-container" data-alt="A small, circular profile picture of an artisanal kitchen manager wearing a chef's coat, styled with warm, appetizing lighting typical of high-end food-tech brands." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwPfGaklPCCHkgQwJAr8mqEqqmiHQ74yIgCYVYACQrj1ZmObp51g7mcP1k8YtSG47Q6-qAfl8dwTpUiL8pe-AJVKkPI7Hp5tYbhyXN1PQ2kvPyqJPHrgxjIqXtet1cSI_ldg5hjvWEkyzYTbBNgy8paM7DVqiQfUmBjvLgS7ig7SlxzcEx7m0z_h8xIIUZftge6j41BcDFlttOxe8gC6oskttAy-TK1eFw4jlcurhLzNOwTd8mOVvEESs-rPws5AbWAHBWTSdA3A4"/>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary leading-none">Pizzania Admin</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">Kitchen Manager</span>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-lg text-label-lg py-sm px-md rounded-lg flex items-center justify-center gap-2 hover:bg-secondary transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">add</span>
+                    New Pizza
+                </button>
+</div>
+<nav class="flex-1 px-sm space-y-2">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-md px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-md px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-lg text-label-lg">Orders</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-md px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-lg text-label-lg">Inventory</span>
+</a>
+<a class="bg-primary text-on-primary rounded-lg mx-2 flex items-center gap-md px-md py-sm translate-x-1 duration-200 shadow-md" href="#">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-lg text-label-lg">Customers</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-md px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<div class="px-sm mt-auto pt-md border-t border-surface-container-high">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-md px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-lg text-label-lg">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen relative overflow-y-auto">
+<!-- Atmospheric Background Element -->
+<div class="absolute top-0 right-0 w-[600px] h-[400px] bg-surface-container-high rounded-bl-[100px] opacity-40 mix-blend-multiply pointer-events-none -z-10" style="background-image: radial-gradient(circle at center, var(--tw-colors-tertiary-container) 0%, transparent 70%);"></div>
+<div class="px-margin-desktop py-xl flex-1 max-w-7xl mx-auto w-full flex flex-col gap-xl">
+<!-- Page Header -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-md w-full">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Customer Roster</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage and view artisanal pizza lovers.</p>
+</div>
+<!-- Search & Filter Controls -->
+<div class="flex items-center gap-sm w-full md:w-auto">
+<div class="relative flex-1 md:w-80 group">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-xl pr-sm py-sm bg-surface-container-lowest border border-surface-container-highest rounded-lg font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-sm placeholder:text-on-surface-variant/60" placeholder="Search by name or email..." type="text"/>
+</div>
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-high text-on-surface rounded-lg border border-surface-container-highest hover:bg-surface-variant transition-colors font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Filter
+                        </button>
+</div>
+</header>
+<!-- Data Table Area -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-container-highest table-shadow overflow-hidden flex-1 flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-surface-container-highest">
+<th class="py-md px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Customer</th>
+<th class="py-md px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Contact</th>
+<th class="py-md px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Orders</th>
+<th class="py-md px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Total Spent</th>
+<th class="py-md px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group cursor-pointer">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-label-lg">JD</div>
+<span class="font-label-lg text-label-lg text-on-surface">John Doe</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">john.doe@example.com</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">+1 (555) 019-2834</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface border border-surface-container-highest">14 Orders</span>
+</td>
+<td class="py-md px-md text-right">
+<span class="font-label-lg text-label-lg text-on-surface">$342.50</span>
+</td>
+<td class="py-md px-md text-center">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group cursor-pointer">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-label-lg">SA</div>
+<span class="font-label-lg text-label-lg text-on-surface">Sarah Adams</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">sarah.a@domain.co</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">+1 (555) 234-5678</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface border border-surface-container-highest">8 Orders</span>
+</td>
+<td class="py-md px-md text-right">
+<span class="font-label-lg text-label-lg text-on-surface">$195.00</span>
+</td>
+<td class="py-md px-md text-center">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group cursor-pointer">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-label-lg">MR</div>
+<span class="font-label-lg text-label-lg text-on-surface">Michael Rossi</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">m.rossi@artisanal.net</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">+1 (555) 987-6543</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary/10 font-label-sm text-label-sm text-primary border border-primary/20">32 Orders</span>
+</td>
+<td class="py-md px-md text-right">
+<span class="font-label-lg text-label-lg text-on-surface font-bold text-primary-container">$1,240.75</span>
+</td>
+<td class="py-md px-md text-center">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group cursor-pointer">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-label-lg">EK</div>
+<span class="font-label-lg text-label-lg text-on-surface">Elena Kovač</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">elena.k@example.org</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">+1 (555) 321-0987</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface border border-surface-container-highest">3 Orders</span>
+</td>
+<td class="py-md px-md text-right">
+<span class="font-label-lg text-label-lg text-on-surface">$85.20</span>
+</td>
+<td class="py-md px-md text-center">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="mt-auto px-md py-sm bg-surface-container-low border-t border-surface-container-highest flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Showing 1 to 4 of 156 entries</span>
+<div class="flex items-center gap-xs">
+<button class="p-xs rounded hover:bg-surface-container-highest text-on-surface-variant transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center justify-center transition-colors">3</button>
+<span class="text-on-surface-variant px-1">...</span>
+<button class="p-xs rounded hover:bg-surface-container-highest text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

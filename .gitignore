@@ -1,0 +1,8 @@
+node_modules/
+server/pizzania.db
+server/pizzania.db-journal
+server/pizzania.db-wal
+server/pizzania.db-shm
+server/.env
+client/dist/
+.DS_Store

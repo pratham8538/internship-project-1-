@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizzania - Savor the Perfect Slice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-fixed": "#ffdad4", "on-error": "#ffffff", "surface-tint": "#bb1718", error: "#ba1a1a", "surface-container-highest": "#f0e3a4", "outline-variant": "#e5beb9", "on-tertiary-fixed": "#241a00", primary: "#BE1A1A", "on-primary": "#ffffff", "on-primary-fixed": "#410002", "on-tertiary": "#ffffff", surface: "#fff9eb", "on-background": "#201c00", outline: "#906f6b", "secondary-fixed-dim": "#ffb4a7", "on-surface": "#201c00", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-bright": "#fff9eb", "surface-dim": "#e7db9c", "surface-container-low": "#fff4c4", "surface-variant": "#f0e3a4", tertiary: "#725c0d", "inverse-primary": "#ffb4aa", "on-secondary-container": "#fffbff", "on-primary-container": "#ffd1cb", "on-secondary-fixed-variant": "#920700", "on-secondary-fixed": "#400100", "on-error-container": "#93000a", "primary-fixed": "#ffdad5", "primary-container": "#be1a1a", "inverse-on-surface": "#fff2b1", background: "#fff9eb", "primary-fixed-dim": "#ffb4aa", "secondary-container": "#d93723", "tertiary-fixed-dim": "#e2c46d", "surface-container": "#fcefae", secondary: "#b51c0c", "on-surface-variant": "#5c403c", "tertiary-fixed": "#ffe088", "tertiary-container": "#c5a955", "error-container": "#ffdad6", "inverse-surface": "#373102", "on-tertiary-container": "#4e3e00", "surface-container-high": "#f6e9a9", "on-primary-fixed-variant": "#930009", "on-tertiary-fixed-variant": "#574500", "background-light": "#f8f6f6", "background-dark": "#211111"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {base: "8px", md: "24px", gutter: "24px", "margin-mobile": "16px", "margin-desktop": "80px", lg: "40px", xl: "64px", sm: "12px", xs: "4px"}, fontFamily: {"display-lg": ["Montserrat"], "headline-lg-mobile": ["Montserrat"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Montserrat"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Montserrat"], "label-lg": ["Plus Jakarta Sans"], headline: ["Public Sans"], display: ["Public Sans"], body: ["Inter"], label: ["Public Sans"]}, fontSize: {"display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "label-lg": ["14px", {lineHeight: "1.2", fontWeight: "600"}]}}}};</script>
+<style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a0f0e 0%, #3a1515 100%);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(247, 216, 127, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-background/90 dark:bg-surface-dim/90 border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none docked full-width top-0 sticky backdrop-blur-md z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 w-full max-w-7xl mx-auto">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1; font-size: 32px;">local_pizza</span>
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">Pizzania</span>
+</div>
+<!-- Navigation Links (Web) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg text-primary dark:text-inverse-primary font-bold border-b-2 border-primary pb-1 hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors" href="#">Home</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors py-1 px-2 rounded" href="#">Menu</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors py-1 px-2 rounded" href="#">About Us</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors py-1 px-2 rounded" href="#">Track Order</a>
+</nav>
+<!-- Trailing Action -->
+<div class="flex items-center">
+<a class="bg-primary-container hover:bg-[#D0311E] text-on-primary-container font-label-lg text-label-lg px-6 py-2.5 rounded-full shadow-[0_4px_14px_rgba(190,26,26,0.3)] transition-all transform hover:scale-105 active:scale-95 duration-150" href="#">Login</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-background">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col">
+<!-- Hero Section -->
+<section class="relative w-full min-h-[600px] hero-gradient flex items-center overflow-hidden">
+<!-- Background Decorative Elements -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 70% 50%, #BE1A1A 0%, transparent 50%);"></div>
+<div class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-md relative z-10 py-12 md:py-0">
+<!-- Left Content -->
+<div class="flex flex-col justify-center gap-6 max-w-xl">
+<h1 class="font-display-lg text-display-lg text-[#F8EBAB] text-glow uppercase leading-tight">
+<span class="block text-[#F7D87F] font-medium text-headline-md tracking-wider mb-2">Savor The</span>
+                        Perfect Slice
+                    </h1>
+<p class="font-body-lg text-body-lg text-inverse-on-surface/90 max-w-md">
+                        Handcrafted pizzas made with the finest ingredients, delivered hot to your door.
+                    </p>
+<div class="flex flex-wrap items-center gap-4 mt-4">
+<button class="bg-[#F7D87F] hover:bg-[#f0e3a4] text-[#410002] font-label-lg text-label-lg px-8 py-4 rounded-full font-bold shadow-[0_4px_20px_rgba(247,216,127,0.2)] transition-all transform hover:scale-105">
+                            ORDER NOW
+                        </button>
+<button class="flex items-center gap-2 text-[#F8EBAB] hover:text-white font-label-lg text-label-lg px-4 py-4 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                            WATCH VIDEO
+                        </button>
+</div>
+</div>
+<!-- Right Image -->
+<div class="relative h-[400px] md:h-[600px] flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/10 rounded-full blur-3xl filter"></div>
+<img class="w-full h-full object-contain object-center transform scale-110 md:scale-125 z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]" data-alt="A top-down view of a large, freshly baked artisanal pizza with a perfectly blistered crust, rich red tomato sauce, melted mozzarella cheese, pepperoni slices, fresh basil leaves, and scattered black olives. The pizza is placed on a dark wooden textured surface, illuminated by warm, directional lighting that highlights the glossy textures and creates a premium, mouth-watering food photography aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9sN1r3gGr_HfCf8L2TIyOtwPEnAQdklkIewGHPXA_QI-Z5jWNBBuczJg5A8c-H8Fo3zgYRKdMyoThTLrDoJV47xb6C39q2nm5qFY2yyPX-slOSAMDzDXs0PEDUVXxgg0X-kL4E6F6mVXt0mv8lP3hggWXgfnn3354QtkoIyo3K5gjfi9DCysh4HbgV6eu9Suk9dhyXDd9qADhVtkLC9sgm41LgrZbpKzxEMSR0AN4wpwLawMXmmdALnN7Zso0C4x3vEqb7yT1JJ4"/>
+<!-- Floating ingredients (decorative) -->
+<img class="absolute top-1/4 right-1/4 w-12 h-12 object-contain blur-[1px] opacity-80 animate-[bounce_4s_infinite]" data-alt="A fresh basil leaf, perfectly lit, floating against a dark background, high resolution food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAhuMwTKPN1oPGF9k-kX13FBwmfkWiAoI0WAzV0jM4I1GbQS6N36QAZLKcUEptRHee1w75Cd8f6ruBoL2m7uZ88B6kU524vqU4Vwa1iNb86mcVXdrcJn6R8ijLDZoRk-Ue5Q3jOTI7zHdmj_OPiZq9hY71IwwBEEE57GKipQYW-WHkueVt5mOjTFOqrpkRkGwNFDCnTt7ug7nzfofhp0PCOEoyjcBqIKN0YYxMiiZpW4ukMndZfxE5nBzC2qZcbYViHP_2fpKJPMs"/>
+<img class="absolute bottom-1/4 left-1/4 w-16 h-16 object-contain blur-[2px] opacity-70 animate-[bounce_5s_infinite_reverse]" data-alt="A slice of pepperoni, perfectly lit, floating against a dark background, high resolution food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIUVTeQxs3PVJP6RyRcgDNHxR8avSxeSMTZMUbWUBOadQaLca5p1jakJTG5-Vx3UVZ2mXUink0NMY3baZ5u7MczT2N7CHK7Jqc1icetx_IaFhgzpidcxfApMiGKMV6AxOD-mxj5Zm3BePZAdqQm6rXtz2cBfTn7s1bJca_Gh0F9MZb4xcbhRkMPzOMuYAHvEuHCXJcZFkkqZckoITDquGPygHxJJtAR3bnRRKsM9ihHNhaYBt3lzc9k8vgWb5vM03SR7rRVbTmfCU"/>
+</div>
+</div>
+<!-- Service Highlights Bar -->
+<div class="absolute bottom-0 left-0 w-full bg-[#110A0A]/80 backdrop-blur-md border-t border-[#3a1515] py-4 hidden md:block">
+<div class="max-w-7xl mx-auto px-margin-desktop flex justify-between items-center text-inverse-on-surface">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#3a1515] flex items-center justify-center text-[#F7D87F]">
+<span class="material-symbols-outlined">electric_moped</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-[#F8EBAB]">Fast Delivery</p>
+<p class="font-label-sm text-label-sm opacity-70">30 min delivery</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#3a1515] flex items-center justify-center text-[#F7D87F]">
+<span class="material-symbols-outlined">workspace_premium</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-[#F8EBAB]">Best Quality</p>
+<p class="font-label-sm text-label-sm opacity-70">Premium ingredients</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#3a1515] flex items-center justify-center text-[#F7D87F]">
+<span class="material-symbols-outlined">local_fire_department</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-[#F8EBAB]">Hot &amp; Fresh</p>
+<p class="font-label-sm text-label-sm opacity-70">Cooked to perfection</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#3a1515] flex items-center justify-center text-[#F7D87F]">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-[#F8EBAB]">Secure Payment</p>
+<p class="font-label-sm text-label-sm opacity-70">100% secure</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-surface-dim w-full py-xl px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter w-full max-w-7xl mx-auto flat border-t border-surface-container-highest dark:border-surface-container">
+<div class="col-span-1 md:col-span-4 mb-8 flex justify-between items-center border-b border-surface-container pb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1; font-size: 24px;">local_pizza</span>
+<span class="font-display-lg text-headline-md text-primary font-bold">Pizzania</span>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
+                Crafting artisanal pizzas with passion and premium ingredients since 2024.
+            </p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-lg text-label-lg font-bold text-on-surface">Legal</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary hover:opacity-80 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary hover:opacity-80 transition-opacity" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-lg text-label-lg font-bold text-on-surface">Explore</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary hover:opacity-80 transition-opacity" href="#">Nutrition</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary hover:opacity-80 transition-opacity" href="#">Contact Us</a>
+</div>
+<div class="col-span-1 md:col-span-4 mt-8 pt-8 border-t border-surface-container text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Pizzania Artisanal Kitchen. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizzania - My Orders</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-fixed": "#ffdad4", "on-error": "#ffffff", "surface-tint": "#bb1718", error: "#ba1a1a", "surface-container-highest": "#f0e3a4", "outline-variant": "#e5beb9", "on-tertiary-fixed": "#241a00", primary: "#BE1A1A", "on-primary": "#ffffff", "on-primary-fixed": "#410002", "on-tertiary": "#ffffff", surface: "#fff9eb", "on-background": "#201c00", outline: "#906f6b", "secondary-fixed-dim": "#ffb4a7", "on-surface": "#201c00", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-bright": "#fff9eb", "surface-dim": "#e7db9c", "surface-container-low": "#fff4c4", "surface-variant": "#f0e3a4", tertiary: "#725c0d", "inverse-primary": "#ffb4aa", "on-secondary-container": "#fffbff", "on-primary-container": "#ffd1cb", "on-secondary-fixed-variant": "#920700", "on-secondary-fixed": "#400100", "on-error-container": "#93000a", "primary-fixed": "#ffdad5", "primary-container": "#be1a1a", "inverse-on-surface": "#fff2b1", background: "#fff9eb", "primary-fixed-dim": "#ffb4aa", "secondary-container": "#d93723", "tertiary-fixed-dim": "#e2c46d", "surface-container": "#fcefae", secondary: "#b51c0c", "on-surface-variant": "#5c403c", "tertiary-fixed": "#ffe088", "tertiary-container": "#c5a955", "error-container": "#ffdad6", "inverse-surface": "#373102", "on-tertiary-container": "#4e3e00", "surface-container-high": "#f6e9a9", "on-primary-fixed-variant": "#930009", "on-tertiary-fixed-variant": "#574500", "background-light": "#f8f6f6", "background-dark": "#211111"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {base: "8px", md: "24px", gutter: "24px", "margin-mobile": "16px", "margin-desktop": "80px", lg: "40px", xl: "64px", sm: "12px", xs: "4px"}, fontFamily: {"display-lg": ["Montserrat"], "headline-lg-mobile": ["Montserrat"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Montserrat"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Montserrat"], "label-lg": ["Plus Jakarta Sans"], headline: ["Public Sans"], display: ["Public Sans"], body: ["Inter"], label: ["Public Sans"]}, fontSize: {"display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "label-lg": ["14px", {lineHeight: "1.2", fontWeight: "600"}]}}}};</script>
+<style>
+        .glass-nav {
+            backdrop-filter: blur(10px);
+        }
+        .order-card-shadow {
+            box-shadow: 0 4px 20px rgba(187, 23, 24, 0.05);
+        }
+        .text-truncate-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased flex flex-col min-h-screen">
+<!-- TopNavBar (Track Order Active) -->
+<header class="bg-background/90 dark:bg-surface-dim/90 font-display-lg text-headline-md. Labels: font-label-lg text-label-lg docked full-width top-0 sticky backdrop-blur-md border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none z-50">
+<div class="flex justify-between items-center px-margin-desktop h-20 w-full max-w-7xl mx-auto">
+<!-- Brand Logo -->
+<a class="font-display-lg text-headline-md font-bold text-primary dark:text-inverse-primary flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_pizza</span>
+                Pizzania
+            </a>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg px-2 py-1" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg px-2 py-1" href="#">Menu</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg px-2 py-1" href="#">About Us</a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary transition-colors font-label-lg text-label-lg px-2 py-1" href="#">Track Order</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden md:block bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-primary transition-colors hover:text-on-primary shadow-sm">
+                    Login
+                </button>
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex justify-center py-lg px-margin-mobile md:px-margin-desktop w-full max-w-7xl mx-auto gap-gutter">
+<!-- Optional Sidebar for Profile Area (Simulated Context) -->
+<aside class="hidden lg:flex flex-col w-64 bg-surface-container-low rounded-xl p-md h-fit border border-surface-container-high order-card-shadow">
+<div class="flex flex-col items-center mb-md">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-sm border-4 border-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="A portrait photo of a young man smiling warmly in a casual, sunlit setting. He has dark hair, a neat beard, and is wearing a comfortable grey t-shirt. The background is slightly blurred out, suggesting an outdoor cafe environment. Warm, inviting lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrgAUrLoy3y6pTg-1o1nai5OnmPLuJxfYTbgAjrmmvma6DjlLyzP2wtMCqKX6l3J_fdwu8xnqv17yypOeDY7HtzGnm8-V9dHAUms6tEBOU_5qhO0TSe0yvifGDQBXgFN_F_GIC2Xm7jquQqrqRgoTSg9rzQD2V9hsmATFPOojaReXU-IhaRK9o0q0zg1plnIHISr0OAS8FOmaETiO1l6lrpmzQdP7tkVFvIjQ1aTIIFnws1mPLJUSo0YsZgseQzW8pve-WbHGFZL0"/>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">John Doe</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">john.doe@email.com</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">person</span> Profile Settings
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container text-on-primary-container font-label-lg text-label-lg font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span> My Orders
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">home</span> My Addresses
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">favorite</span> Wishlist
+                </a>
+<hr class="border-surface-container-high my-2"/>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-error hover:bg-error-container hover:text-on-error-container transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">logout</span> Logout
+                </a>
+</nav>
+</aside>
+<!-- Orders List Area -->
+<section class="flex-1 w-full flex flex-col gap-sm">
+<h1 class="font-headline-lg text-headline-lg md:text-display-lg text-on-background mb-4">My Orders</h1>
+<!-- Order Card 1: Delivered -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-surface-container-high flex flex-col sm:flex-row gap-md justify-between items-start sm:items-center order-card-shadow transition-transform hover:-translate-y-1 hover:shadow-md duration-200">
+<div class="flex gap-md items-center w-full sm:w-auto">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a delicious, freshly baked Farm House pizza on a rustic wooden board. The pizza is loaded with colorful toppings like green peppers, onions, tomatoes, and mushrooms on a bed of melted mozzarella cheese. Warm, appetizing lighting highlights the textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeKsS6a01n7tlZFB0AsF3M5vY_RyKovfK7YL8ic8sh6MCkjYgDrPS3wdIRtOPCXutZLwzJVL_lVc1LUZt-11Cu0u1G-fWaA1bwbdnnrVE5SJbj5fHBhq9eMV-MPIRlEvadLq4O_L-CB3ZPNVvcWcxQT-zpiG-tlSoIphWT8nxnHFnS4pU105qp13HG8XmiBltLumnfIOh2Jo6uWkBnCklXG_VB_hfS3SSBLDqJNAUCSltJZN3itc9umGCd3VO2gXaglNbyo2PAFfM"/>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between sm:justify-start items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface">Order ID: #PZ123456789</span>
+<span class="sm:hidden px-2 py-1 rounded-full text-label-sm font-label-sm bg-surface-variant text-on-surface-variant">Delivered</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">2 Items • May 20, 2024</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-truncate-1">Farm House (Medium), Garlic Bread</p>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-md w-full sm:w-auto mt-4 sm:mt-0">
+<span class="hidden sm:inline-block px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface">Delivered</span>
+<button class="px-6 py-2 rounded-full border border-primary text-primary font-label-lg text-label-lg hover:bg-primary-container hover:text-on-primary-container transition-colors w-full sm:w-auto text-center">
+                        View Details
+                    </button>
+</div>
+</div>
+<!-- Order Card 2: Delivered -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-surface-container-high flex flex-col sm:flex-row gap-md justify-between items-start sm:items-center order-card-shadow transition-transform hover:-translate-y-1 hover:shadow-md duration-200">
+<div class="flex gap-md items-center w-full sm:w-auto">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A close-up shot of a creamy chicken delight pizza slice being lifted, with strings of melted mozzarella cheese stretching downwards. The pizza features chunks of grilled chicken, herbs, and a rich, creamy sauce. The lighting is warm and inviting, typical of a high-end pizzeria." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7wIhJd45HYYjofEjG3hnECL148FKNXEfOORveMjtyMdUUuv-NGL7LUZzzydkxVTZONey91aaYHtJ190G6h_4sLznrPVRSUvsYH1elwODNx3-3hkT1TJWuvSX3NpIGbToL4SzsJiGDdmWsxcR7Xc2_fnzSzMm1KqxZJKUiIpohtzQLsyGeIOkLe0ZuhSm-Pxa62TEMHnjf9YOvVIdSAgbVaFJOrpnvxwt44iRVc3qGKM8ZOoe1Ga9V2A-RNUw32wpF2o7B7fbjIXw"/>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between sm:justify-start items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface">Order ID: #PZ987654321</span>
+<span class="sm:hidden px-2 py-1 rounded-full text-label-sm font-label-sm bg-surface-variant text-on-surface-variant">Delivered</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">3 Items • May 15, 2024</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-truncate-1">Creamy Chicken Delight (Large), Choco Lava Cake, Cola</p>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-md w-full sm:w-auto mt-4 sm:mt-0">
+<span class="hidden sm:inline-block px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface">Delivered</span>
+<button class="px-6 py-2 rounded-full border border-primary text-primary font-label-lg text-label-lg hover:bg-primary-container hover:text-on-primary-container transition-colors w-full sm:w-auto text-center">
+                        View Details
+                    </button>
+</div>
+</div>
+<!-- Order Card 3: In Kitchen -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-tertiary-container flex flex-col sm:flex-row gap-md justify-between items-start sm:items-center order-card-shadow relative overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md duration-200">
+<!-- Active order indicator strip -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-container"></div>
+<div class="flex gap-md items-center w-full sm:w-auto pl-2">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-surface-variant">
+<img class="w-full h-full object-cover grayscale-[20%]" data-alt="An overhead view of a Peppy Paneer pizza being prepared in a commercial kitchen. Uncooked pizza base topped with marinara sauce, scattered mozzarella, cubes of paneer, and bell peppers, ready to go into the oven. Flour dust is visible on the stainless steel counter." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUJTaCfmuYCGsVcTKpgKJ1I5Zyc0NFb4aanhc-OMxq141w87G1xq5SD0rPw4ajNXwPJJCDy2LPokFr6H1ycCUQcBzj9VKEGSmzF6hR84hBP3Z9QxUpiKY6KWg5D9YRMKrMLnN7N2sxzuFCla8dbc1-VfdmGx07hDm4WYPnL0AfFO2G_cju1DqNbInAyTHDVPAKkOGqUc2UCJoLCUzh1ChvXRyhi24gYoT2lRVpXURg-sCFBRu5a40CU8p0DlnrFt_gqB1Klw179g8"/>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between sm:justify-start items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface">Order ID: #PZ112233445</span>
+<span class="sm:hidden px-2 py-1 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-on-tertiary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">skillet</span> In Kitchen
+                            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">1 Item • May 25, 2024</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-truncate-1">Peppy Paneer (Medium)</p>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-md w-full sm:w-auto mt-4 sm:mt-0">
+<span class="hidden sm:flex px-3 py-1 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-on-tertiary-fixed items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">skillet</span> In Kitchen
+                    </span>
+<button class="px-6 py-2 rounded-full border border-primary text-primary font-label-lg text-label-lg hover:bg-primary-container hover:text-on-primary-container transition-colors w-full sm:w-auto text-center">
+                        Track
+                    </button>
+</div>
+</div>
+<!-- Order Card 4: Out for Delivery -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-secondary-container flex flex-col sm:flex-row gap-md justify-between items-start sm:items-center order-card-shadow relative overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md duration-200">
+<!-- Active order indicator strip -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex gap-md items-center w-full sm:w-auto pl-2">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A stylized illustration of a pizza delivery box strapped to the back of a red scooter, speeding down a city street at sunset. The style is modern, slightly warm, and energetic, conveying speed and fresh delivery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV9u6egR7EjUkeeQd7bRQ2rwcsxixbSm9_rR8_oLg-sWcLN7P-j1rWMWPNO3f3G-kvlzmeSBVa_1dfs6yWyoTMXIQ7FlrvazjJjM1gPgnc-wpBI6hGnGWBMpue3CpdEzG12ARBQK1XFjs8qekFW-uzPCX8ijfeEXfxSdFmHVCKIonCAAdAldJk8XL9gjJRiCaY99kBmNvuyhbdvH6yREcZ6sbWO2ILv_w6_LuvBF0sWjFgIbzbv8Rfc2D-15hVEE-iU-twaGO1xeQ"/>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between sm:justify-start items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface">Order ID: #PZ556677889</span>
+<span class="sm:hidden px-2 py-1 rounded-full text-label-sm font-label-sm bg-secondary-fixed text-on-secondary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">two_wheeler</span> Out for Delivery
+                            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">2 Items • May 25, 2024</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-truncate-1">Margherita (Large), Garlic Bread</p>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-md w-full sm:w-auto mt-4 sm:mt-0">
+<span class="hidden sm:flex px-3 py-1 rounded-full text-label-sm font-label-sm bg-secondary-fixed text-on-secondary-fixed items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">two_wheeler</span> Out for Delivery
+                    </span>
+<button class="px-6 py-2 rounded-full border border-primary text-primary font-label-lg text-label-lg hover:bg-primary-container hover:text-on-primary-container transition-colors w-full sm:w-auto text-center">
+                        Track
+                    </button>
+</div>
+</div>
+<!-- Load More -->
+<div class="w-full flex justify-center mt-md">
+<button class="px-8 py-3 rounded-full bg-surface-container-low border border-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-variant transition-colors shadow-sm">
+                    Load More
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-surface-dim font-body-md text-body-md. Labels: font-label-sm text-label-sm w-full py-xl px-margin-desktop mt-auto border-t border-surface-container">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter w-full max-w-7xl mx-auto">
+<!-- Brand Column -->
+<div class="flex flex-col gap-4">
+<a class="font-display-lg text-headline-md text-primary flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">local_pizza</span>
+                    Pizzania
+                </a>
+<p class="text-on-surface-variant text-body-md font-body-md">Handcrafted pizzas made with the finest ingredients, delivered hot to your door.</p>
+</div>
+<!-- Links -->
+<div class="flex flex-col gap-3">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Company</h4>
+<a class="text-on-surface-variant hover:text-secondary font-body-md text-body-md transition-colors" href="#">About Us</a>
+<a class="text-on-surface-variant hover:text-secondary font-body-md text-body-md transition-colors" href="#">Contact Us</a>
+<a class="text-on-surface-variant hover:text-secondary font-body-md text-body-md transition-colors" href="#">Careers</a>
+</div>
+<!-- Legal -->
+<div class="flex flex-col gap-3">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Legal</h4>
+<a class="text-on-surface-variant hover:text-secondary font-body-md text-body-md transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary font-body-md text-body-md transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary font-body-md text-body-md transition-colors" href="#">Nutrition</a>
+</div>
+<!-- Social/Copyright -->
+<div class="flex flex-col gap-4">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Follow Us</h4>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+</div>
+<p class="text-on-surface-variant text-label-sm font-label-sm mt-4">
+                    © 2024 Pizzania Artisanal Kitchen. All rights reserved.
+                </p>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizzania - Savor the Perfect Slice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#bb1718",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "tertiary": "#725c0d",
+                        "on-primary-fixed-variant": "#930009",
+                        "background": "#fff9eb",
+                        "on-secondary-container": "#fffbff",
+                        "secondary": "#b51c0c",
+                        "secondary-container": "#d93723",
+                        "on-background": "#201c00",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#f0e3a4",
+                        "surface-dim": "#e7db9c",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-surface-variant": "#5c403c",
+                        "surface": "#fff9eb",
+                        "primary-fixed-dim": "#ffb4aa",
+                        "tertiary-fixed-dim": "#e2c46d",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#fcefae",
+                        "surface-container-low": "#fff4c4",
+                        "outline-variant": "#e5beb9",
+                        "inverse-on-surface": "#fff2b1",
+                        "tertiary-container": "#c5a955",
+                        "primary-fixed": "#ffdad5",
+                        "tertiary-fixed": "#ffe088",
+                        "primary": "#97000a",
+                        "on-primary-container": "#ffd1cb",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fff9eb",
+                        "on-secondary-fixed": "#400100",
+                        "outline": "#906f6b",
+                        "primary-container": "#be1a1a",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#373102",
+                        "surface-container-highest": "#f0e3a4",
+                        "surface-container-high": "#f6e9a9",
+                        "secondary-fixed": "#ffdad4",
+                        "error": "#ba1a1a",
+                        "on-surface": "#201c00",
+                        "on-tertiary-container": "#4e3e00",
+                        "on-primary-fixed": "#410002",
+                        "inverse-primary": "#ffb4aa",
+                        "secondary-fixed-dim": "#ffb4a7",
+                        "on-secondary-fixed-variant": "#920700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "margin-desktop": "80px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        .shadow-ambient {
+            box-shadow: 0 10px 30px -10px rgba(190, 26, 26, 0.15);
+        }
+        
+        .shadow-glow {
+            box-shadow: 0 10px 25px -5px rgba(190, 26, 26, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm dark:shadow-none docked full-width top-0 bg-surface-container/10 border-b border-outline-variant/30 fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 max-w-[1440px] mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">
+            Pizzania
+        </div>
+<!-- Desktop Nav Links -->
+<div class="hidden md:flex items-center gap-gutter">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold text-label-lg font-label-lg opacity-80 scale-95 transition-all" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium text-label-lg font-label-lg hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">Menu</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium text-label-lg font-label-lg hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">About Us</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium text-label-lg font-label-lg hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">Track Order</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="bg-primary-container hover:bg-[#D0311E] text-on-primary font-label-lg text-label-lg px-6 py-3 rounded-lg shadow-glow transition-all duration-300 transform hover:-translate-y-1">
+                Order Now
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-[90px] min-h-screen">
+<!-- Hero Section -->
+<section class="relative w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto py-xl md:py-[120px] flex flex-col-reverse md:flex-row items-center gap-xl">
+<!-- Hero Text Content -->
+<div class="flex-1 flex flex-col gap-md z-10">
+<div class="inline-flex items-center gap-2 bg-surface-container px-4 py-2 rounded-full w-max border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" data-weight="fill">local_fire_department</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Artisanal &amp; Authentic</span>
+</div>
+<h1 class="text-display-lg font-display-lg text-on-background max-w-2xl">
+                    Savor the <span class="text-primary-container italic">Perfect Slice</span>
+</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl">
+                    Experience the true taste of tradition. Hand-tossed dough, vine-ripened tomatoes, and premium mozzarella, baked to perfection in our wood-fired ovens.
+                </p>
+<div class="flex flex-col sm:flex-row items-center gap-md pt-base">
+<button class="w-full sm:w-auto bg-primary-container hover:bg-[#D0311E] text-on-primary font-label-lg text-label-lg px-8 py-4 rounded-lg shadow-glow transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+<span>Order Now</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto bg-transparent hover:bg-surface-container text-on-surface font-label-lg text-label-lg px-8 py-4 rounded-lg border border-outline-variant transition-all duration-300 flex justify-center items-center gap-2 group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-weight="fill">play_circle</span>
+<span>Watch Video</span>
+</button>
+</div>
+</div>
+<!-- Hero Image Asset -->
+<div class="flex-1 relative w-full h-[400px] md:h-[600px] rounded-xl md:rounded-[40px] overflow-hidden shadow-ambient group">
+<div class="absolute inset-0 bg-gradient-to-tr from-surface/20 to-transparent z-10 rounded-xl md:rounded-[40px] pointer-events-none"></div>
+<img class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" data-alt="A spectacular close-up shot of a freshly baked artisanal Neapolitan pizza sitting on a rustic wooden board. The pizza features a perfectly blistered, charred crust with rich, deep red San Marzano tomato sauce, melting pools of creamy white mozzarella, and vibrant fresh green basil leaves. The lighting is warm and directional, suggesting an inviting, high-end Italian kitchen atmosphere. The background is slightly out of focus, emphasizing the mouth-watering textures and rich, warm colors of the pizza." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1wCvqnYxYNCZViY5-DEapMZ9WeB31i4pHgisltAqxHmk4CAn-_MmqEP-cWIsa4FhaKn5dlDtFBCyyJ7LhDmSyFbkgNh_1wAHKPmxwMxgmBl8MlUNJdhQxTOz92I74Qil_59gMnAaGRhNthgSISzhmcEG-50fQWXKVwlAUsMYwEkSL8gtLr6DHN1Mg3IT9yl0rYC-28u4rD-pRprde5Xa6q1NvfLtn-CUnzuFsYoOn_KbCDVxIngM2hhA5NK01TIswPegejQ8BpY4"/>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto py-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Benefit Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-lg border border-surface-variant shadow-ambient flex flex-col gap-base hover:border-primary-fixed-dim transition-colors group">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary transition-colors mb-sm">
+<span class="material-symbols-outlined text-3xl" data-weight="fill">two_wheeler</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-background">Fast Delivery</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">
+                        Hot and fresh, straight from our oven to your door. We ensure your pizza arrives in peak condition, maintaining that perfect crispy crust.
+                    </p>
+</div>
+<!-- Benefit Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-lg border border-surface-variant shadow-ambient flex flex-col gap-base hover:border-primary-fixed-dim transition-colors group">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary transition-colors mb-sm">
+<span class="material-symbols-outlined text-3xl" data-weight="fill">eco</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-background">Best Quality</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">
+                        We source only the finest ingredients. From locally grown organic produce to imported Italian cheeses, quality is baked into every bite.
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface full-width bottom bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant/20 flat no shadows w-full px-margin-desktop py-xl flex flex-col md:flex-row justify-between items-center gap-base">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">
+            Pizzania
+        </div>
+<div class="flex flex-wrap justify-center gap-md text-body-md font-body-md text-on-surface-variant dark:text-outline-variant">
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 focus:underline decoration-2 underline-offset-4" href="#">Privacy Policy</a>
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 focus:underline decoration-2 underline-offset-4" href="#">Terms of Service</a>
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 focus:underline decoration-2 underline-offset-4" href="#">Contact Us</a>
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 focus:underline decoration-2 underline-offset-4" href="#">Careers</a>
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 focus:underline decoration-2 underline-offset-4" href="#">Locations</a>
+</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant">
+            © 2024 Pizzania Artisanal Pizzeria. All rights reserved.
+        </div>
+</footer>
+</body></html>

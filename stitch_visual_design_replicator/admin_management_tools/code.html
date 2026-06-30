@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizzania Admin - Orders &amp; Inventory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-fixed": "#ffdad4", "on-error": "#ffffff", "surface-tint": "#bb1718", error: "#ba1a1a", "surface-container-highest": "#f0e3a4", "outline-variant": "#e5beb9", "on-tertiary-fixed": "#241a00", primary: "#BE1A1A", "on-primary": "#ffffff", "on-primary-fixed": "#410002", "on-tertiary": "#ffffff", surface: "#fff9eb", "on-background": "#201c00", outline: "#906f6b", "secondary-fixed-dim": "#ffb4a7", "on-surface": "#201c00", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-bright": "#fff9eb", "surface-dim": "#e7db9c", "surface-container-low": "#fff4c4", "surface-variant": "#f0e3a4", tertiary: "#725c0d", "inverse-primary": "#ffb4aa", "on-secondary-container": "#fffbff", "on-primary-container": "#ffd1cb", "on-secondary-fixed-variant": "#920700", "on-secondary-fixed": "#400100", "on-error-container": "#93000a", "primary-fixed": "#ffdad5", "primary-container": "#be1a1a", "inverse-on-surface": "#fff2b1", background: "#fff9eb", "primary-fixed-dim": "#ffb4aa", "secondary-container": "#d93723", "tertiary-fixed-dim": "#e2c46d", "surface-container": "#fcefae", secondary: "#b51c0c", "on-surface-variant": "#5c403c", "tertiary-fixed": "#ffe088", "tertiary-container": "#c5a955", "error-container": "#ffdad6", "inverse-surface": "#373102", "on-tertiary-container": "#4e3e00", "surface-container-high": "#f6e9a9", "on-primary-fixed-variant": "#930009", "on-tertiary-fixed-variant": "#574500", "background-light": "#f8f6f6", "background-dark": "#211111"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {base: "8px", md: "24px", gutter: "24px", "margin-mobile": "16px", "margin-desktop": "80px", lg: "40px", xl: "64px", sm: "12px", xs: "4px"}, fontFamily: {"display-lg": ["Montserrat"], "headline-lg-mobile": ["Montserrat"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Montserrat"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Montserrat"], "label-lg": ["Plus Jakarta Sans"], headline: ["Public Sans"], display: ["Public Sans"], body: ["Inter"], label: ["Public Sans"]}, fontSize: {"display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "label-lg": ["14px", {lineHeight: "1.2", fontWeight: "600"}]}}}};</script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .glass-panel { background: rgba(255, 249, 235, 0.7); backdrop-filter: blur(10px); border: 1px solid theme('colors.surface-variant'); }
+        .custom-shadow { box-shadow: 0 4px 20px rgba(187, 23, 24, 0.08); }
+        
+        /* Chart specific styles */
+        .bar-chart-container { height: 250px; display: flex; align-items: flex-end; gap: 8px; padding-top: 20px; }
+        .bar { width: 100%; background-color: theme('colors.primary-container'); border-radius: 4px 4px 0 0; transition: height 0.5s ease; cursor: pointer; }
+        .bar:hover { background-color: theme('colors.primary'); }
+        .bar.secondary { background-color: theme('colors.secondary-container'); }
+        .bar.secondary:hover { background-color: theme('colors.secondary'); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden font-body-md antialiased">
+<!-- SideNavBar -->
+<nav class="bg-surface-container dark:bg-surface-dim shadow-lg dark:shadow-none h-screen w-64 fixed left-0 top-0 flex flex-col h-full py-md z-50">
+<div class="px-md mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl" data-weight="fill" style='font-variation-settings: "FILL" 1;'>local_pizza</span>
+<div class="font-display-lg text-headline-md text-primary font-bold">Pizzania</div>
+</div>
+<div class="flex-1 px-sm space-y-sm">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all hover:bg-primary-container hover:text-on-primary-container font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm bg-primary text-on-primary rounded-lg mx-2 transition-all translate-x-1 duration-200 font-label-lg text-label-lg shadow-md" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style='font-variation-settings: "FILL" 1;'>shopping_bag</span>
+                Orders
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all hover:bg-primary-container hover:text-on-primary-container font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all hover:bg-primary-container hover:text-on-primary-container font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+                Customers
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all hover:bg-primary-container hover:text-on-primary-container font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<div class="px-md mt-auto">
+<button class="w-full bg-primary-container text-on-primary font-label-lg text-label-lg py-sm rounded-lg shadow-sm hover:bg-primary transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-sm">add</span> New Pizza
+            </button>
+<div class="mt-md border-t border-surface-container-high pt-md">
+<div class="flex items-center gap-sm mb-sm">
+<img class="w-10 h-10 rounded-full object-cover border border-surface-variant" data-alt="A professional headshot of an administrative user, warm lighting, approachable expression, clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2am9WCQljBOEQ08NIn5zxF72BhOgr-cwgvZ6fkD-Q7GB3iARBwxY8hRt94gc9Y0JvqE8nsjChJvBrKtvjG1WrDlpre-6BKC6_4OvpmGGCDe6NAyG3gJulyhNYiJ10jl_WgUCeSPYk34Oc7U4GYsfV9-g4JFaKObAmPrDzA3MNKCP2goZmPP1kynw-27ApZvkIU2HsZZVR6-u8IaTA4q9l1aLObNlrNoHkxNm8CcLrM9DYeYJnWTu-8xDX6Gp1g9zQGHrOj4EKX0w"/>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Pizzania Admin</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Kitchen Manager</div>
+</div>
+</div>
+<a class="flex items-center gap-sm text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Logout
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="ml-64 flex-1 h-screen overflow-y-auto bg-background p-md lg:p-margin-desktop">
+<!-- Header area for the current section -->
+<header class="flex justify-between items-center mb-xl">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-xs">Orders Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">View and manage all customer orders and delivery statuses.</p>
+</div>
+<div class="flex items-center gap-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface rounded-full border border-surface-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md text-body-md w-64 shadow-sm" placeholder="Search..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface border border-surface-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-gutter mb-gutter">
+<!-- 15. Admin Orders Page (Bento Grid Style) -->
+<section class="col-span-full bg-surface rounded-xl p-md custom-shadow border border-surface-variant flex flex-col min-h-[600px]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Recent Orders</h2>
+<p class="text-label-sm text-on-surface-variant">Real-time tracking of incoming and active orders</p>
+</div>
+<div class="flex flex-wrap items-center gap-sm w-full md:w-auto">
+<div class="relative flex-1 md:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-surface-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-sm" placeholder="Search orders..." type="text"/>
+</div>
+<select class="bg-surface-container-lowest border border-surface-variant rounded-lg px-3 py-2 font-label-sm text-on-surface-variant focus:border-primary outline-none">
+<option>All Status</option>
+<option>In Kitchen</option>
+<option>Out for Delivery</option>
+<option>Delivered</option>
+</select>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-sm hover:bg-secondary transition-colors">Export CSV</button>
+</div>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-variant">
+<th class="py-md px-sm font-headline-md text-label-sm text-on-surface-variant uppercase tracking-wider">Order ID</th>
+<th class="py-md px-sm font-headline-md text-label-sm text-on-surface-variant uppercase tracking-wider">Customer</th>
+<th class="py-md px-sm font-headline-md text-label-sm text-on-surface-variant uppercase tracking-wider">Items</th>
+<th class="py-md px-sm font-headline-md text-label-sm text-on-surface-variant uppercase tracking-wider">Total</th>
+<th class="py-md px-sm font-headline-md text-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="py-md px-sm font-headline-md text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-sm">
+<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<td class="py-md px-sm text-primary font-bold">#PZ-8924</td>
+<td class="py-md px-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">JD</div>
+<span class="text-on-surface font-medium">John Doe</span>
+</div>
+</td>
+<td class="py-md px-sm text-on-surface-variant">1x Truffle Mushroom, 1x Garlic Knots</td>
+<td class="py-md px-sm text-on-surface font-semibold">$28.50</td>
+<td class="py-md px-sm">
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-[10px] uppercase tracking-widest font-bold">In Kitchen</span>
+</td>
+<td class="py-md px-sm text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<td class="py-md px-sm text-primary font-bold">#PZ-8925</td>
+<td class="py-md px-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold text-xs">SS</div>
+<span class="text-on-surface font-medium">Sarah Smith</span>
+</div>
+</td>
+<td class="py-md px-sm text-on-surface-variant">2x Pepperoni Feast, 1x Coke 1.5L</td>
+<td class="py-md px-sm text-on-surface font-semibold">$42.00</td>
+<td class="py-md px-sm">
+<span class="px-3 py-1 rounded-full bg-green-100 text-green-800 font-label-sm text-[10px] uppercase tracking-widest font-bold">Delivered</span>
+</td>
+<td class="py-md px-sm text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<td class="py-md px-sm text-primary font-bold">#PZ-8926</td>
+<td class="py-md px-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-xs">MJ</div>
+<span class="text-on-surface font-medium">Mike Johnson</span>
+</div>
+</td>
+<td class="py-md px-sm text-on-surface-variant">1x Margherita, 1x Cheesy Breadsticks</td>
+<td class="py-md px-sm text-on-surface font-semibold">$24.99</td>
+<td class="py-md px-sm">
+<span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 font-label-sm text-[10px] uppercase tracking-widest font-bold">Out for Delivery</span>
+</td>
+<td class="py-md px-sm text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 19. Sales Reports (Admin) -->
+</div>
+</main>
+</body></html>

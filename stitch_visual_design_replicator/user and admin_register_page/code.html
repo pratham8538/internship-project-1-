@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizzania - Create Account</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-fixed": "#ffdad4", "on-error": "#ffffff", "surface-tint": "#bb1718", error: "#ba1a1a", "surface-container-highest": "#f0e3a4", "outline-variant": "#e5beb9", "on-tertiary-fixed": "#241a00", primary: "#BE1A1A", "on-primary": "#ffffff", "on-primary-fixed": "#410002", "on-tertiary": "#ffffff", surface: "#fff9eb", "on-background": "#201c00", outline: "#906f6b", "secondary-fixed-dim": "#ffb4a7", "on-surface": "#201c00", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-bright": "#fff9eb", "surface-dim": "#e7db9c", "surface-container-low": "#fff4c4", "surface-variant": "#f0e3a4", tertiary: "#725c0d", "inverse-primary": "#ffb4aa", "on-secondary-container": "#fffbff", "on-primary-container": "#ffd1cb", "on-secondary-fixed-variant": "#920700", "on-secondary-fixed": "#400100", "on-error-container": "#93000a", "primary-fixed": "#ffdad5", "primary-container": "#be1a1a", "inverse-on-surface": "#fff2b1", background: "#fff9eb", "primary-fixed-dim": "#ffb4aa", "secondary-container": "#d93723", "tertiary-fixed-dim": "#e2c46d", "surface-container": "#fcefae", secondary: "#b51c0c", "on-surface-variant": "#5c403c", "tertiary-fixed": "#ffe088", "tertiary-container": "#c5a955", "error-container": "#ffdad6", "inverse-surface": "#373102", "on-tertiary-container": "#4e3e00", "surface-container-high": "#f6e9a9", "on-primary-fixed-variant": "#930009", "on-tertiary-fixed-variant": "#574500", "background-light": "#f8f6f6", "background-dark": "#211111"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {base: "8px", md: "24px", gutter: "24px", "margin-mobile": "16px", "margin-desktop": "80px", lg: "40px", xl: "64px", sm: "12px", xs: "4px"}, fontFamily: {"display-lg": ["Montserrat"], "headline-lg-mobile": ["Montserrat"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Montserrat"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Montserrat"], "label-lg": ["Plus Jakarta Sans"], headline: ["Public Sans"], display: ["Public Sans"], body: ["Inter"], label: ["Public Sans"]}, fontSize: {"display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "label-lg": ["14px", {lineHeight: "1.2", fontWeight: "600"}]}}}};</script>
+<style>
+        .custom-shadow {
+            box-shadow: 0 10px 20px -5px rgba(187, 23, 24, 0.08), 0 8px 16px -8px rgba(187, 23, 24, 0.04);
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop font-body-md relative overflow-hidden" style="background-color: rgb(26, 15, 10); background-image: radial-gradient(circle, rgb(58, 28, 18) 0%, rgb(26, 15, 10) 100%);">
+<!-- Background Accents -->
+<!-- Registration Card -->
+<main class="w-full max-w-[480px] bg-surface rounded-xl custom-shadow p-lg md:p-xl relative z-10 border border-surface-container-highest">
+<!-- Header -->
+<div class="text-center mb-xl">
+<div class="flex justify-center items-center gap-2 mb-md text-primary">
+<span class="material-symbols-outlined text-4xl" data-icon="local_pizza" data-weight="fill" style='font-variation-settings: "FILL" 1;'>local_pizza</span>
+<h1 class="font-display-lg text-headline-md font-bold tracking-tight">PIZZANIA</h1>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Create Account</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Join us and enjoy the best pizzas.</p>
+</div>
+<!-- Form -->
+<form action="#" class="space-y-md" method="POST">
+<!-- Full Name -->
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-xs" for="name">Full Name</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-surface-container-highest rounded-lg px-md py-sm pl-12 text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" id="name" name="name" placeholder="Enter your name" required="" type="text"/>
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="person">person</span>
+</div>
+</div>
+<!-- Email -->
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-xs" for="email">Email</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-surface-container-highest rounded-lg px-md py-sm pl-12 text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" id="email" name="email" placeholder="Enter your email" required="" type="email"/>
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="mail">mail</span>
+</div>
+</div>
+<!-- Password -->
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-xs" for="password">Password</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-surface-container-highest rounded-lg px-md py-sm pl-12 pr-12 text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" id="password" name="password" placeholder="Create a password" required="" type="password"/>
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="lock">lock</span>
+<button class="absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Confirm Password -->
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-xs" for="confirm-password">Confirm Password</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-surface-container-highest rounded-lg px-md py-sm pl-12 pr-12 text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required="" type="password"/>
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="lock_reset">lock_reset</span>
+<button class="absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-sm">
+<button class="w-full bg-primary-container text-on-primary font-label-lg text-label-lg py-sm rounded-lg shadow-sm hover:bg-secondary transition-colors focus:ring-4 focus:ring-primary-fixed focus:outline-none flex justify-center items-center gap-2" type="submit">
+                    REGISTER
+                </button>
+</div>
+<!-- Or Divider -->
+<div class="flex items-center gap-4 py-sm">
+<div class="h-px bg-surface-container-highest flex-1"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Or continue with</span>
+<div class="h-px bg-surface-container-highest flex-1"></div>
+</div>
+<!-- Social Login -->
+<button class="w-full bg-surface-container-lowest border border-surface-container-highest text-on-surface font-label-lg text-label-lg py-sm rounded-lg hover:bg-surface-container-low transition-colors flex justify-center items-center gap-3" type="button">
+<img alt="Google Logo" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuuKUwGKeSs_BsI8TUPZSBMQgnjQvJ176q8_aQpw1HHyelwqSO0dBgM1ev58OFsSSPtwHNZ4ze8cdEehr7y4FfqncKqqZMdn8o4Og0cy9mUrRhPcQ-O2rh_BugXSfpNyUoTOgtyXeWM8xohGLvyns6naOQAb5i2RzbZu4_IqU7W4vIcZGkPiJzVe255o-dicVK-dz2RVaZlxJ6RaEVQzY6rQZnSlESkyWj_el8J0MzTYLlCjVv-Hx_c7ijjHnPystw-ni3ChjhhBk"/>
+               Google
+            </button>
+<!-- Login Link -->
+<div class="text-center mt-lg pt-sm">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Already have an account? 
+                    <a class="text-primary font-bold hover:underline" href="#">Login</a>
+</p>
+</div>
+</form>
+</main>
+</body></html>

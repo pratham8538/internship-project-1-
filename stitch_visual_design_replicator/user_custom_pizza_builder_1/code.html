@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizzania - Custom Pizza Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"secondary-fixed": "#ffdad4", "on-error": "#ffffff", "surface-tint": "#bb1718", error: "#ba1a1a", "surface-container-highest": "#f0e3a4", "outline-variant": "#e5beb9", "on-tertiary-fixed": "#241a00", primary: "#BE1A1A", "on-primary": "#ffffff", "on-primary-fixed": "#410002", "on-tertiary": "#ffffff", surface: "#fff9eb", "on-background": "#201c00", outline: "#906f6b", "secondary-fixed-dim": "#ffb4a7", "on-surface": "#201c00", "on-secondary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-bright": "#fff9eb", "surface-dim": "#e7db9c", "surface-container-low": "#fff4c4", "surface-variant": "#f0e3a4", tertiary: "#725c0d", "inverse-primary": "#ffb4aa", "on-secondary-container": "#fffbff", "on-primary-container": "#ffd1cb", "on-secondary-fixed-variant": "#920700", "on-secondary-fixed": "#400100", "on-error-container": "#93000a", "primary-fixed": "#ffdad5", "primary-container": "#be1a1a", "inverse-on-surface": "#fff2b1", background: "#201c00", "primary-fixed-dim": "#ffb4aa", "secondary-container": "#d93723", "tertiary-fixed-dim": "#e2c46d", "surface-container": "#312a00", secondary: "#b51c0c", "on-surface-variant": "#f0e3a4", "tertiary-fixed": "#ffe088", "tertiary-container": "#c5a955", "error-container": "#ffdad6", "inverse-surface": "#fff9eb", "on-tertiary-container": "#4e3e00", "surface-container-high": "#453b00", "on-primary-fixed-variant": "#930009", "on-tertiary-fixed-variant": "#574500", "background-light": "#f8f6f6", "background-dark": "#211111"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {base: "8px", md: "24px", gutter: "24px", "margin-mobile": "16px", "margin-desktop": "80px", lg: "40px", xl: "64px", sm: "12px", xs: "4px"}, fontFamily: {"display-lg": ["Montserrat"], "headline-lg-mobile": ["Montserrat"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Montserrat"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Montserrat"], "label-lg": ["Plus Jakarta Sans"], headline: ["Public Sans"], display: ["Public Sans"], body: ["Inter"], label: ["Public Sans"]}, fontSize: {"display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "1.2", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "1.2", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "label-lg": ["14px", {lineHeight: "1.2", fontWeight: "600"}]}}}};</script>
+<style>
+        body { background-color: #1a0f0d; color: #f8ebab; } /* Custom dark background matching image */
+        .glass-panel {
+            background: rgba(49, 42, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(247, 216, 127, 0.1);
+        }
+        .option-card:hover {
+            border-color: #f7d87f;
+            background: rgba(247, 216, 127, 0.05);
+        }
+        .option-card.selected {
+            border-color: #be1a1a;
+            background: rgba(190, 26, 26, 0.1);
+        }
+        .stepper-node {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(247, 216, 127, 0.2);
+            color: #f7d87f;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        .stepper-node.active {
+            background-color: #be1a1a;
+            color: white;
+            box-shadow: 0 0 15px rgba(190, 26, 26, 0.5);
+        }
+        .stepper-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: rgba(247, 216, 127, 0.2);
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md overflow-x-hidden relative">
+<!-- Ambient background glows -->
+<div class="fixed top-0 left-0 w-[500px] h-[500px] bg-primary-container/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+<div class="fixed bottom-0 right-0 w-[600px] h-[600px] bg-tertiary-container/10 rounded-full blur-[120px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+<!-- Header Navigation Shell -->
+<header class="w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop py-md z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-bold text-3xl" style="font-variation-settings: 'FILL' 1;">local_pizza</span>
+<span class="font-display-lg text-headline-md font-bold text-surface-container-highest uppercase tracking-wider">Pizzania</span>
+</div>
+<nav class="hidden md:flex gap-lg items-center">
+<a class="text-surface-container-highest hover:text-primary transition-colors font-label-lg uppercase tracking-wide" href="#">Home</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-lg uppercase tracking-wide" href="#">Menu</a>
+<a class="text-surface-container-highest hover:text-primary transition-colors font-label-lg uppercase tracking-wide" href="#">About Us</a>
+<a class="text-surface-container-highest hover:text-primary transition-colors font-label-lg uppercase tracking-wide" href="#">Track Order</a>
+</nav>
+<button class="bg-primary-container hover:bg-secondary text-white font-label-lg px-6 py-2 rounded-full transition-all shadow-[0_4px_14px_0_rgba(190,26,26,0.39)] uppercase tracking-wide">Login</button>
+</header>
+<main class="flex-grow flex flex-col items-center px-margin-mobile md:px-margin-desktop py-lg w-full max-w-7xl mx-auto z-10">
+<!-- Stepper -->
+<div class="w-full max-w-3xl mb-xl relative">
+<div class="stepper-line"></div>
+<div class="flex justify-between items-center w-full relative">
+<div class="flex flex-col items-center gap-2">
+<div class="stepper-node active">1</div>
+<span class="font-label-sm text-surface-container-highest">Base</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="stepper-node">2</div>
+<span class="font-label-sm text-surface-container-highest/60">Sauce</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="stepper-node">3</div>
+<span class="font-label-sm text-surface-container-highest/60">Cheese</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="stepper-node">4</div>
+<span class="font-label-sm text-surface-container-highest/60">Veggies</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="stepper-node">5</div>
+<span class="font-label-sm text-surface-container-highest/60">Meat</span>
+</div>
+</div>
+</div>
+<div class="w-full text-left mb-8">
+<h1 class="font-display-lg text-headline-lg md:text-display-lg text-surface-container-highest mb-2">Choose Your Base</h1>
+<p class="font-body-md text-surface-container-highest/70">The foundation of your perfect slice.</p>
+</div>
+<!-- Selection Grid -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-md w-full">
+<!-- Option 1 -->
+<button class="option-card selected glass-panel rounded-xl p-6 flex flex-col items-center justify-center gap-4 transition-all group">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-primary transition-colors">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a plain, thin crust pizza base on a dark slate surface. The crust is thin, crispy, and lightly golden brown, ready for toppings. Warm, moody lighting typical of a high-end pizzeria." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ0eEAkQkchi_JE91sncrDnvWKnrg2FgaDcOR4HchWfjeedSWgESg3S1sgIzWACMPP3GN2PzpmLAsiUZH-QZ8ImlETQ84kJsq6MVP99baD7UW7TxLpF6_0aB6HnNF0G8D5-ocogrUStvvSxoMJeg_4NzenCzr0SnbNFSZMnT6Gk8FUD6UkaqhBF9h4gts0HU2ZWwrgwysUXU0waGe6_DxCWe_AZp-7DkCQCWyEErgkr_tkexRpWYILK2c2FInqJ5CIrXmt0Xz63bQ"/>
+</div>
+<span class="font-label-lg text-surface-container-highest">Thin Crust</span>
+</button>
+<!-- Option 2 -->
+<button class="option-card glass-panel rounded-xl p-6 flex flex-col items-center justify-center gap-4 transition-all group border border-transparent">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-surface-container-highest transition-colors">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a thick crust pan pizza base. It looks soft, doughy, and slightly puffed up at the edges. Dark wooden table background. Warm, appetizing lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOLGxPwDT7tkA_1AAutUu8MXUrTZa68Ty4h8SWLp9wbk_Kiqn_eQurqVw8r1CG3B_x7_wl3HnplLsRQxdo0hXFH-sep_NSNt1h8yGPlbflzP-rEFFxxTnP3QO4WstIJ1YZZzxPL7peUeYjTruC2BhYBX3RiUI7Xr3Z7IWubLc0iVuU1y6C94MZ5M0nZpb2h4xdDj__T5EyqoCcmaDePUChDrO-OcyAuTFGNs5qiqlzWNftfdg5ZSAkuXi1nnVgtmhHfESmLxVBFJg"/>
+</div>
+<span class="font-label-lg text-surface-container-highest">Thick Crust</span>
+</button>
+<!-- Option 3 -->
+<button class="option-card glass-panel rounded-xl p-6 flex flex-col items-center justify-center gap-4 transition-all group border border-transparent">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-surface-container-highest transition-colors">
+<img class="w-full h-full object-cover" data-alt="A close-up top-down view of a cheese-stuffed crust pizza base. You can subtly see the cheese bulging at the edges. Golden brown and appetizing. Dark, rustic setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQUkBwUrp_mDlUfHyxmM-jsHMOvBnm8oOIT7bD2IofPnbzsFyfteAEpny17zr0yrzhCzJImXL3xU72ts5zMz7mxOwYNHSJKhUW5BjmdGieITTkRotzOZQkF3lYQRar2aJtsED8GwEl3QCY2DsIILYqCgXh8uYndthfp7dx1P8YaUdAxH6M30xLlmo3gny1BRMYXEKjRmWt9w74-vqwFivEkT-D50c1iVTVraVAKOzYgKnq4Q-zcBSwFsMlnLgDxF0hijPtXmASpBQ"/>
+</div>
+<span class="font-label-lg text-surface-container-highest">Cheese Burst</span>
+</button>
+<!-- Option 4 -->
+<button class="option-card glass-panel rounded-xl p-6 flex flex-col items-center justify-center gap-4 transition-all group border border-transparent">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-surface-container-highest transition-colors">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a whole wheat pizza base. It has a slightly darker, earthier tone compared to regular crust. Looks healthy and artisanal on a dark stone background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAellISCbGmHilKKgNVawnpjp07HtC4FvVfoKCaeKuUXBzNwmyLkiGK33fB2HtBSKzOmH0uV3kkK2iWcsQnXDjueweCm5dVmuFxrJSa6MHS36Opu0mGX-V0ILYyCFznHXugpLA4bFOPo7hVdcOZBBpW-NllOqXQx3BfHIx66grBr210qUMgql3DL1dGdzqooWjomr6McVP6mArGZfEX9KVP1TFamuE3ehN7Zn0aIHkqj-5WWgAB05_myDgCKRGnjDo_Xysk-BDiAcM"/>
+</div>
+<span class="font-label-lg text-surface-container-highest">Whole Wheat</span>
+</button>
+<!-- Option 5 -->
+<button class="option-card glass-panel rounded-xl p-6 flex flex-col items-center justify-center gap-4 transition-all group border border-transparent">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-surface-container-highest transition-colors">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a thick pizza base with visibly raised, stuffed edges. It looks heavy and indulgent. Placed on a dark, flour-dusted surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcKeXZPULZkR0zZ1LkI_GKGbG1vu3hztEcjqjk3JzIs8hzuyUS3mhjl8HH9__bly6yAoMi90uzZOHlkjemqAs8r02g_vL6LCI0Oh5OAsoYr_McEU1nVaJebch7P_1pFJJgoMm8QfKWeIGPH4To4Z_11MhUMSxGG5yz1KH7CwSaWVR6A-mzSad1qwyCpQJf1AciILEySFTe8xSwpQhb7RngeTIgDvpiHMp7TEDAahTLnVgdzaELDMRXE22hTbeO7TTB4DXfZ1AVTk0"/>
+</div>
+<span class="font-label-lg text-surface-container-highest">Stuffed Crust</span>
+</button>
+</div>
+</main>
+<!-- Footer Action Bar -->
+<footer class="w-full glass-panel border-t border-surface-container-highest/10 p-margin-mobile md:px-margin-desktop md:py-md sticky bottom-0 z-20 flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-sm text-surface-container-highest/60 uppercase tracking-widest">Total Price</span>
+<span class="font-display-lg text-headline-md font-bold text-surface-container-highest">$8.99</span>
+</div>
+<button class="bg-primary-container hover:bg-secondary text-white font-label-lg px-8 py-4 rounded-lg transition-all shadow-[0_4px_20px_0_rgba(190,26,26,0.4)] uppercase tracking-widest flex items-center gap-2">
+            Next Step
+            <span class="material-symbols-outlined" style="font-size: 20px;">arrow_forward</span>
+</button>
+</footer>
+</body></html>
