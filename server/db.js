@@ -75,6 +75,28 @@ CREATE TABLE IF NOT EXISTS staff_members (
   status TEXT DEFAULT 'active',
   created_at TEXT DEFAULT (datetime('now', '+05:30'))
 );
+
+CREATE TABLE IF NOT EXISTS reviews (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  pizza_id INTEGER NOT NULL,
+  user_id INTEGER,
+  user_name TEXT NOT NULL,
+  rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+  comment TEXT NOT NULL,
+  created_at TEXT DEFAULT (datetime('now', '+05:30')),
+  FOREIGN KEY(pizza_id) REFERENCES pizzas(id),
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS favorites (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  pizza_id INTEGER NOT NULL,
+  created_at TEXT DEFAULT (datetime('now', '+05:30')),
+  UNIQUE(user_id, pizza_id),
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(pizza_id) REFERENCES pizzas(id)
+);
 `);
 
 try {
@@ -117,6 +139,41 @@ if (toppingCount === 0) {
   ];
   const tx = db.transaction((rows) => rows.forEach(r => insert.run(...r)));
   tx(seed);
+}
+
+// Seed initial reviews if empty
+const reviewsCount = db.prepare('SELECT COUNT(*) as c FROM reviews').get().c;
+if (reviewsCount === 0) {
+  const insertReview = db.prepare('INSERT INTO reviews (pizza_id, user_id, user_name, rating, comment, created_at) VALUES (?,?,?,?,?,?)');
+  const reviewSeeds = [
+    ['Margherita Classic', 'Elena Rostova', 5, 'The crust on this Margherita is absolute perfection! Charred just right with fragrant fresh basil.', '2026-10-18 19:24:00'],
+    ['Margherita Classic', 'Liam Miller', 5, 'Best San Marzano tomato sauce in town. Simple, pure, authentic Italian flavor.', '2026-10-20 20:11:00'],
+    ['Margherita Classic', 'Aarav Sharma', 4, 'Really delicious classic pizza. Delivered warm and crispy in 25 mins.', '2026-10-21 14:05:00'],
+    ['Pepperoni Supreme', 'Jessica Vance', 5, 'Crispy cups of pepperoni with an oregano kick. Our family Friday night staple!', '2026-10-19 21:30:00'],
+    ['Pepperoni Supreme', 'David K.', 5, 'Hands down the best pepperoni pizza. Generous cheese and crunchy crust.', '2026-10-21 18:45:00'],
+    ['Quattro Formaggi', 'Sophie Dubois', 5, 'The Gorgonzola balance is sublime. Truly a gourmet cheese lover’s dream.', '2026-10-17 19:50:00'],
+    ['BBQ Chicken Ranch', 'Tyler Brooks', 5, 'Tangy BBQ glaze and tender grilled chicken. The ranch drizzle takes it over the top!', '2026-10-20 18:22:00'],
+    ['Veggie Garden', 'Priya Patel', 5, 'So fresh and colorful! The bell peppers and mushrooms tasted farm-fresh.', '2026-10-21 13:10:00'],
+    ['Truffle Mushroom', 'Chef Antoine', 5, 'The truffle oil aroma hits you immediately. Luxurious, earthy, and perfectly balanced.', '2026-10-16 20:40:00'],
+    ['Meat Lovers', 'Marcus Cole', 5, 'Packed with meat and savory flavor. Keeps you full and satisfied!', '2026-10-20 17:00:00'],
+    ['Spicy Diavola', 'Matteo Ricci', 5, 'Authentic spicy diavola kick! Pairs brilliantly with a cold beverage.', '2026-10-21 21:05:00'],
+  ];
+  const findPizza = db.prepare('SELECT id FROM pizzas WHERE name = ? LIMIT 1');
+  const txReviews = db.transaction((rows) => {
+    rows.forEach(([pName, author, stars, text, date]) => {
+      const p = findPizza.get(pName);
+      if (p) insertReview.run(p.id, null, author, stars, text, date);
+    });
+  });
+  txReviews(reviewSeeds);
+
+  // Recalculate pizza ratings from reviews
+  try {
+    db.prepare(`
+      UPDATE pizzas 
+      SET rating = COALESCE((SELECT ROUND(AVG(rating), 1) FROM reviews WHERE pizza_id = pizzas.id), rating)
+    `).run();
+  } catch (e) {}
 }
 
 // Seed default admin

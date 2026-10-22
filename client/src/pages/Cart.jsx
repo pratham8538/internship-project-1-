@@ -32,8 +32,31 @@ export default function Cart() {
             <div key={item.key} className="flex items-center gap-4 bg-surface-container rounded-xl p-5 border border-outline-variant/30 hover:border-primary/25 transition-all">
               <img src={item.image} alt={item.name} className="w-20 h-20 rounded-lg object-cover border border-outline-variant/20" />
               <div className="flex-1">
-                <h3 className="font-display font-bold text-on-surface">{item.name}</h3>
-                <p className="text-sm text-on-surface-variant mt-1">${item.price.toFixed(2)} each</p>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-display font-bold text-on-surface">{item.name}</h3>
+                  {item.customization?.isHalfAndHalf && (
+                    <span className="text-[10px] bg-primary/10 border border-primary/20 text-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                      Split Pie
+                    </span>
+                  )}
+                </div>
+
+                {item.customization?.isHalfAndHalf ? (
+                  <div className="text-xs text-on-surface-variant mt-1.5 space-y-0.5">
+                    <p><span className="font-semibold text-primary">Crust:</span> {item.customization.crust}</p>
+                    <p><span className="font-semibold text-primary">Left:</span> {item.customization.left?.summary || 'Custom'}</p>
+                    <p><span className="font-semibold text-amber-400">Right:</span> {item.customization.right?.summary || 'Custom'}</p>
+                  </div>
+                ) : item.customization?.toppings ? (
+                  <div className="text-xs text-on-surface-variant mt-1.5">
+                    <p><span className="font-semibold text-primary">Crust:</span> {item.customization.crust}</p>
+                    {item.customization.toppings?.length > 0 && (
+                      <p><span className="font-semibold text-primary">Toppings:</span> {item.customization.toppings.join(', ')}</p>
+                    )}
+                  </div>
+                ) : null}
+
+                <p className="text-xs text-on-surface-variant/80 mt-1">${item.price.toFixed(2)} each</p>
               </div>
               <div className="flex items-center gap-3">
                 <button onClick={() => updateQty(item.key, item.qty - 1)} className="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center font-bold hover:bg-primary/25 hover:text-primary transition-all">−</button>

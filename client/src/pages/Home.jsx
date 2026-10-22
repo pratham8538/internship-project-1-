@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 
 export default function Home() {
   const [pizzas, setPizzas] = useState([]);
   const navigate = useNavigate();
   const { addItem } = useCart();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     api.getPizzas().then((d) => setPizzas(d.pizzas.slice(0, 4))).catch(() => {});
@@ -56,28 +58,54 @@ export default function Home() {
           <Link to="/menu" className="text-primary font-bold text-sm tracking-wider uppercase hover:underline flex items-center gap-1">View Full Menu <span className="material-symbols-outlined text-sm">arrow_forward</span></Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pizzas.map((p) => (
-            <div key={p.id} className="warm-card bg-surface-container rounded-xl overflow-hidden shadow-warm border border-outline-variant group">
-              <div className="h-48 overflow-hidden cursor-pointer relative" onClick={() => navigate(`/pizza/${p.id}`)}>
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors z-10" />
-                <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-              </div>
-              <div className="p-5">
-                <span className="text-[10px] bg-primary/10 border border-primary/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider mb-2 inline-block">{p.category}</span>
-                <h3 className="font-display font-bold text-on-surface mb-1 group-hover:text-primary transition-colors cursor-pointer" onClick={() => navigate(`/pizza/${p.id}`)}>{p.name}</h3>
-                <p className="text-sm text-on-surface-variant line-clamp-2 mb-4 h-10">{p.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-primary text-lg">${p.price.toFixed(2)}</span>
-                  <button
-                    onClick={() => addItem({ pizzaId: p.id, name: p.name, price: p.price, image: p.image })}
-                    className="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-hover transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-lg">add</span>
-                  </button>
+          {pizzas.map((p) => {
+            const fav = isFavorite(p.id);
+            return (
+              <div key={p.id} className="warm-card bg-surface-container rounded-xl overflow-hidden shadow-warm border border-outline-variant group relative">
+                {/* Heart button */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(p);
+                  }}
+                  className={`absolute top-3 right-3 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                    fav
+                      ? 'bg-red-500/20 backdrop-blur-md border border-red-500/40 text-red-500 scale-110 shadow-lg'
+                      : 'bg-black/50 backdrop-blur-md border border-white/10 text-white/80 hover:text-white hover:scale-110'
+                  }`}
+                  title={fav ? 'Remove from favorites' : 'Add to favorites'}
+                >
+                  <span className={`material-symbols-outlined text-base ${fav ? 'icon-fill' : ''}`}>favorite</span>
+                </button>
+
+                <div className="h-48 overflow-hidden cursor-pointer relative" onClick={() => navigate(`/pizza/${p.id}`)}>
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors z-10" />
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] bg-primary/10 border border-primary/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">{p.category}</span>
+                    <div className="flex items-center text-xs font-semibold text-primary">
+                      <span className="material-symbols-outlined icon-fill text-sm" style={{ color: '#C5A880' }}>star</span>
+                      <span className="ml-0.5">{p.rating ? Number(p.rating).toFixed(1) : '4.8'}</span>
+                    </div>
+                  </div>
+                  <h3 className="font-display font-bold text-on-surface mb-1 group-hover:text-primary transition-colors cursor-pointer text-lg" onClick={() => navigate(`/pizza/${p.id}`)}>{p.name}</h3>
+                  <p className="text-sm text-on-surface-variant line-clamp-2 mb-4 h-10">{p.description}</p>
+                  <div className="flex items-center justify-between pt-3 border-t border-outline-variant/20">
+                    <span className="font-bold text-primary text-lg">${p.price.toFixed(2)}</span>
+                    <button
+                      onClick={() => addItem({ pizzaId: p.id, name: p.name, price: p.price, image: p.image })}
+                      className="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-hover transition-colors shadow-glow"
+                    >
+                      <span className="material-symbols-outlined text-lg">add</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

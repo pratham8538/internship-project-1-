@@ -25,6 +25,11 @@ export const api = {
   getPizza: (id) => request(`/menu/pizzas/${id}`),
   getCategories: () => request('/menu/categories'),
   getToppings: () => request('/menu/toppings'),
+  getPizzaReviews: (id) => request(`/menu/pizzas/${id}/reviews`),
+  submitPizzaReview: (id, payload, token) => request(`/menu/pizzas/${id}/reviews`, { method: 'POST', body: payload, token }),
+  getFavorites: (token) => request('/menu/favorites', { token }),
+  getFavoriteIds: (token) => request('/menu/favorites/ids', { token }),
+  toggleFavorite: (pizzaId, token) => request(`/menu/favorites/${pizzaId}`, { method: 'POST', token }),
 
   createOrder: (payload, token) => request('/orders', { method: 'POST', body: payload, token }),
   myOrders: (token) => request('/orders/my', { token }),
