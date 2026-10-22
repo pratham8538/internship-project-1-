@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
   phone TEXT,
   address TEXT,
   role TEXT DEFAULT 'customer',
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+  created_at TEXT DEFAULT (datetime('now', '+05:30'))
 );
 
 CREATE TABLE IF NOT EXISTS pizzas (
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS orders (
   payment_method TEXT,
   payment_details TEXT,
   order_number TEXT,
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  created_at TEXT DEFAULT (datetime('now', '+05:30')),
   FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS staff_members (
   phone TEXT,
   avatar TEXT,
   status TEXT DEFAULT 'active',
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+  created_at TEXT DEFAULT (datetime('now', '+05:30'))
 );
 `);
 

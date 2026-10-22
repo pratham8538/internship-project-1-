@@ -5,8 +5,8 @@
 body {
   @apply bg-background text-on-background;
   background-image:
-    radial-gradient(circle at top right, rgba(247, 216, 127, 0.2), transparent 30%),
-    radial-gradient(circle at top left, rgba(190, 26, 26, 0.1), transparent 35%);
+    radial-gradient(circle at top right, rgba(197, 168, 128, 0.08), transparent 45%),
+    radial-gradient(circle at bottom left, rgba(20, 20, 23, 0.8), transparent 50%);
 }
 
 .material-symbols-outlined {
@@ -19,20 +19,29 @@ body {
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb { background: #e5beb9; border-radius: 9999px; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }
 
 .auth-shell {
   background:
-    radial-gradient(circle at center, rgba(58, 28, 18, 0.92) 0%, rgba(26, 15, 10, 0.98) 65%),
-    linear-gradient(135deg, #2b140f 0%, #120906 100%);
+    radial-gradient(circle at center, rgba(30, 26, 21, 0.95) 0%, rgba(11, 11, 12, 0.99) 70%),
+    linear-gradient(135deg, #18181c 0%, #070708 100%);
 }
 
 .auth-panel {
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(197, 168, 128, 0.15);
 }
 
 .warm-card {
-  box-shadow: 0 10px 30px rgba(187, 23, 24, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(197, 168, 128, 0.1);
+  transition: all 0.3s ease;
+}
+
+.warm-card:hover {
+  border-color: rgba(197, 168, 128, 0.3);
+  box-shadow: 0 12px 35px rgba(197, 168, 128, 0.05);
 }
 
 .success-pulse {
@@ -50,15 +59,15 @@ body {
 @keyframes success-pulse {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(190, 26, 26, 0.55);
+    box-shadow: 0 0 0 0 rgba(197, 168, 128, 0.55);
   }
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 18px rgba(190, 26, 26, 0);
+    box-shadow: 0 0 0 18px rgba(197, 168, 128, 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(190, 26, 26, 0);
+    box-shadow: 0 0 0 0 rgba(197, 168, 128, 0);
   }
 }
 

@@ -60,7 +60,7 @@ export default function CustomBuilder() {
 
   const Section = ({ title, category, single }) => (
     <div className="mb-8">
-      <h3 className="font-display font-bold text-lg mb-3 text-on-surface">{title}</h3>
+      <h3 className="font-display font-bold text-lg mb-4 text-on-surface uppercase tracking-wider text-xs border-b border-outline-variant/30 pb-2">{title}</h3>
       <div className="flex flex-wrap gap-3">
         {(grouped[category] || []).map((item) => {
           const isSel = single ? selected[category]?.id === item.id : (selected[category] || []).some((i) => i.id === item.id);
@@ -68,8 +68,8 @@ export default function CustomBuilder() {
             <button
               key={item.id}
               onClick={() => toggle(category, item, single)}
-              className={`px-4 py-2.5 rounded-full text-sm font-semibold border-2 transition-colors flex items-center gap-2 ${
-                isSel ? 'bg-primary text-white border-primary' : 'border-gold text-on-surface-variant hover:border-primary bg-background'
+              className={`px-4 py-2.5 rounded-full text-sm font-semibold border transition-colors flex items-center gap-2 ${
+                isSel ? 'bg-primary text-on-primary border-primary shadow-glow' : 'border-outline text-on-surface-variant hover:border-primary bg-surface hover:text-primary'
               }`}
             >
               {item.name} {item.price > 0 && <span className="opacity-80">+${item.price.toFixed(2)}</span>}
@@ -81,9 +81,9 @@ export default function CustomBuilder() {
   );
 
   return (
-    <div className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-      <h1 className="font-display text-3xl font-bold text-on-surface mb-1">Build Your Own Pizza</h1>
-      <p className="text-on-surface-variant mb-8">Pick your base, sauce, cheese and toppings — make it exactly how you like it.</p>
+    <div className="max-w-5xl mx-auto px-4 md:px-8 py-10 animate-in fade-in duration-300">
+      <h1 className="font-display text-4xl font-extrabold text-on-surface mb-2">Build Your Own Pizza</h1>
+      <p className="text-on-surface-variant mb-10 leading-relaxed max-w-2xl">Pick your base, sauce, cheese and toppings — crafted exactly to your preference.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div className="md:col-span-2">
@@ -93,25 +93,25 @@ export default function CustomBuilder() {
           <Section title="4. Choose Toppings" category="Topping" />
         </div>
 
-        <div className="bg-surface-container rounded-xl p-6 h-fit sticky top-24 shadow-warm border border-outline-variant">
-          <div className="rounded-lg overflow-hidden mb-4 h-40">
+        <div className="bg-surface-container rounded-xl p-6 h-fit sticky top-24 shadow-warm border border-outline-variant/30">
+          <div className="rounded-lg overflow-hidden mb-4 h-40 border border-outline-variant/20">
             <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600" alt="Custom pizza" className="w-full h-full object-cover" />
           </div>
-          <h3 className="font-display font-bold text-lg mb-2">Your Creation</h3>
+          <h3 className="font-display font-bold text-lg mb-3">Your Creation</h3>
           {summaryNames.length === 0 ? (
-            <p className="text-sm text-on-surface-variant mb-4">Start picking ingredients to build your pizza.</p>
+            <p className="text-sm text-on-surface-variant mb-6">Start picking ingredients to build your pizza.</p>
           ) : (
-            <ul className="text-sm text-on-surface-variant mb-4 space-y-1">
-              {summaryNames.map((n) => <li key={n}>• {n}</li>)}
+            <ul className="text-sm text-on-surface-variant mb-6 space-y-2 border-l-2 border-primary/30 pl-4 py-1">
+              {summaryNames.map((n) => <li key={n} className="list-none text-on-surface">• {n}</li>)}
             </ul>
           )}
-          <div className="flex items-center justify-between border-t border-outline-variant pt-4 mb-4">
-            <span className="font-semibold">Total</span>
-            <span className="font-display text-2xl font-bold text-primary">${total.toFixed(2)}</span>
+          <div className="flex items-center justify-between border-t border-outline-variant/30 pt-4 mb-6">
+            <span className="font-semibold text-on-surface-variant">Total</span>
+            <span className="font-display text-3xl font-black text-primary">${total.toFixed(2)}</span>
           </div>
           <button
             onClick={handleAdd}
-            className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-3.5 rounded-full shadow-glow transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+            className="w-full bg-primary hover:bg-primary-hover text-on-primary font-bold py-3.5 rounded-full shadow-glow transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
           >
             <span className="material-symbols-outlined">{added ? 'check' : 'shopping_cart'}</span>
             {added ? 'Added to Cart!' : 'Add to Cart'}

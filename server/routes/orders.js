@@ -25,7 +25,7 @@ router.post('/', auth, (req, res) => {
   const total = +(subtotal + tax + deliveryFee).toFixed(2);
   const orderNumber = 'PZ-' + Math.random().toString(36).substring(2, 8).toUpperCase();
 
-  const orderInfo = db.prepare('INSERT INTO orders (user_id, status, total, address, payment_method, payment_details, order_number) VALUES (?,?,?,?,?,?,?)')
+  const orderInfo = db.prepare(`INSERT INTO orders (user_id, status, total, address, payment_method, payment_details, order_number, created_at) VALUES (?,?,?,?,?,?,?,datetime('now', '+05:30'))`)
     .run(req.user.id, 'Placed', total, address || '', payment_method || 'Card', JSON.stringify(payment_details || {}), orderNumber);
 
   const insertItem = db.prepare('INSERT INTO order_items (order_id, name, qty, price, customization) VALUES (?,?,?,?,?)');

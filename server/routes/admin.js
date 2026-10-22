@@ -26,7 +26,7 @@ router.get('/reports', (req, res) => {
   const hourlySales = db.prepare(`
     SELECT strftime('%H', created_at) as hour, ROUND(COALESCE(SUM(total), 0), 2) as total
     FROM orders
-    WHERE date(created_at) = date('now')
+    WHERE date(created_at) = date('now', '+05:30')
     GROUP BY strftime('%H', created_at)
     ORDER BY hour
   `).all();
@@ -145,12 +145,23 @@ router.get('/settings', (req, res) => {
 });
 
 router.put('/settings', (req, res) => {
-  const upsert = db.prepare('INSERT INTO settings (key, value) VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value = excluded.value');
-  Object.entries(req.body || {}).forEach(([k, v]) => upsert.run(k, String(v)));
-  const rows = db.prepare('SELECT * FROM settings').all();
-  const settings = {};
-  rows.forEach(r => settings[r.key] = r.value);
-  res.json({ settings });
+  try {
+    const upsert = db.prepare('INSERT INTO settings (key, value) VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value = excluded.value');
+    const updateTransaction = db.transaction((entries) => {
+      for (const [k, v] of entries) {
+        upsert.run(k, String(v));
+      }
+    });
+    updateTransaction(Object.entries(req.body || {}));
+    
+    const rows = db.prepare('SELECT * FROM settings').all();
+    const settings = {};
+    rows.forEach(r => settings[r.key] = r.value);
+    res.json({ settings });
+  } catch (err) {
+    console.error('Error updating settings:', err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 router.get('/staff', (req, res) => {
@@ -161,7 +172,7 @@ router.get('/staff', (req, res) => {
 router.post('/staff', (req, res) => {
   const { name, email, role, phone, avatar, status } = req.body;
   if (!name || !email || !role) return res.status(400).json({ error: 'Name, email and role are required' });
-  const info = db.prepare('INSERT INTO staff_members (name, email, role, phone, avatar, status) VALUES (?,?,?,?,?,?)')
+  const info = db.prepare(`INSERT INTO staff_members (name, email, role, phone, avatar, status, created_at) VALUES (?,?,?,?,?,?,datetime('now', '+05:30'))`)
     .run(name, email, role, phone || '', avatar || '', status || 'active');
   res.json({ staffMember: db.prepare('SELECT * FROM staff_members WHERE id = ?').get(info.lastInsertRowid) });
 });

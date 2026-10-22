@@ -33,4 +33,10 @@ if (fs.existsSync(clientDistPath)) {
 }
 
 const PORT = process.env.PORT || 4000;
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: err.message || 'Internal Server Error' });
+});
+
 app.listen(PORT, () => console.log(`Pizzania API running on http://localhost:${PORT}`));

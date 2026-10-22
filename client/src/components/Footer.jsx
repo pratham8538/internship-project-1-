@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="bg-espresso text-cream mt-auto">
-      <div className="max-w-7xl mx-auto px-4 md:px-20 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-espresso text-cream mt-auto border-t border-outline-variant/30">
+      <div className="max-w-7xl mx-auto px-4 md:px-20 py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <span className="material-symbols-outlined icon-fill text-gold text-2xl">local_pizza</span>
-            <span className="font-display text-xl font-bold">Pizzania</span>
+            <span className="material-symbols-outlined icon-fill text-primary text-2xl">local_pizza</span>
+            <span className="font-display text-xl font-black tracking-widest uppercase">Pizzania</span>
           </div>
           <p className="text-sm text-cream/70">Handcrafted artisanal pizzas, delivered hot and fresh to your door.</p>
         </div>

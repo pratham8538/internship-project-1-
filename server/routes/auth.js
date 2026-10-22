@@ -16,8 +16,8 @@ router.post('/register', (req, res) => {
   const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
   if (existing) return res.status(409).json({ error: 'An account with this email already exists' });
   const hash = bcrypt.hashSync(password, 10);
-  const info = db.prepare('INSERT INTO users (name, email, password, phone, role) VALUES (?,?,?,?,?)')
-    .run(name, email, hash, phone || null, 'customer');
+  const info = db.prepare(`INSERT INTO users (name, email, password, phone, role, created_at) VALUES (?,?,?,?,?,datetime('now', '+05:30'))`)
+    .run(name, email, hash, phone || '', 'customer');
   const user = db.prepare('SELECT id, name, email, phone, role FROM users WHERE id = ?').get(info.lastInsertRowid);
   const token = signToken(user);
   res.json({ token, user });
